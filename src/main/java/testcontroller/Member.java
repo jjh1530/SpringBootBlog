@@ -1,4 +1,4 @@
-package com.cos.blog.controller;
+package testcontroller;
 
 import javax.persistence.Id;
 

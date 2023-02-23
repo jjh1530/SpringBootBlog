@@ -1,4 +1,4 @@
-package com.cos.blog.controller;
+package testcontroller;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

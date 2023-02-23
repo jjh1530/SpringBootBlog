@@ -21,7 +21,7 @@ spring:
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl #entity생성할 때 변수명 그대로 넣어주는의미 카멜표기법 스네이크로 변경아님
       use-new-id-generator-mappings: false
