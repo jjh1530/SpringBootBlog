@@ -19,7 +19,7 @@ spring:
     password: cos1234
     
   jpa:
-    open-in-view: true
+    open-in-view: true  #영속성을 VIEW까지 가져감 -> 트랜잭션이 종료된 후에도 영속 객체(프록시)가 유지되어 데이터 사용 가능(EAGER이 아닌 LAZY전략) 기본으로 true
     hibernate:
       ddl-auto: update
       naming:

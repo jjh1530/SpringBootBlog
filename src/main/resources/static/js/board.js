@@ -1,15 +1,13 @@
 let index = {
 	init: function(){
-		$("#btn_save").on("click",()=>{  //function(){} , () => {} this를 바인딩 하기 위해
+		$("#btn-save").on("click",()=>{  //function(){} , () => {} this를 바인딩 하기 위해
 			this.save();
 		});
 	},
 	save: function() {
-		//alert("user의 save 함수");
 		let data = {
-			username: $("#username").val(),
-			password: $("#password").val(),
-			email: $("#email").val(),
+			title: $("#title").val(),
+			content: $("#content").val(),
 		};
 		
 		//ajax호출시 default 비동기 호출
@@ -17,14 +15,13 @@ let index = {
 		$.ajax({
 			//회원가입 수행 요청
 			type : "POST",
-			url : "/auth/joinProc",
+			url : "/api/board",
 			data : JSON.stringify(data), //http body 데이터
 			contentType : "application/json; charset=utf-8",
 			dataType : "json" // 응답 데이터 기본적으로 문자열
 		}).done(function(response){
 			//웅덥성공
-			alert("회원가입 완료");
-			console.log(response)
+			alert("글 작성 완료");
 			location.href="/"
 		}).fail(function(){
 			//응답 실패

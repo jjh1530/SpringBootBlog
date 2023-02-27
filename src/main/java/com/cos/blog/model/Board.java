@@ -33,10 +33,9 @@ public class Board {
 	@Lob //대용량 데이터
 	private String content; //섬머노트 라이브러리 <html>태그가 섞여서 디자인됨
 
-	@ColumnDefault("0")
 	private int count;
 	
-	@ManyToOne(fetch = FetchType.EAGER)	//board가 여러개 user는 한명
+	@ManyToOne(fetch = FetchType.EAGER)	//board가 여러개 user는 한명 EAGER : 자동으로 user 정보 가져옴 LAZY : 자동으로 가져오지 않음
 	@JoinColumn(name="userId")  //실제로 생서되는 컬럼 이름
 	private User user; // DB는 오브젝트를 저장할 수 없다. FK. 자바는 오브젝트를 저장할 수 있다.
 	
