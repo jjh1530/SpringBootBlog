@@ -4,14 +4,15 @@
 
 <div class="container">
 	<form>
+		<input type="hidden" value="${board.id }"/>
 		<div class="form-group">
-			<input type="text" class="form-control" placeholder="Enter title" id="title">
+			<input type="text" value="${board.title }" class="form-control" placeholder="Enter title" id="title">
 		</div>
 		<div class="form-group">
-		  <textarea class="form-control summernote" rows="5" id="content"></textarea>
+		  <textarea class="form-control summernote" rows="5" id="content"> ${board.content}</textarea>
 		</div>
 	</form>
-	<button id="btn-save" class="btn btn-primary">글작성</button>
+	<button id="btn-update" class="btn btn-primary">수정완료</button>
 </div>
 <script>
       $('.summernote').summernote({

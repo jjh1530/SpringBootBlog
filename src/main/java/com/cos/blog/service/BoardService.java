@@ -25,8 +25,32 @@ public class BoardService {
 		boardRepository.save(board);
 	}
 	
+	@Transactional(readOnly = true)  //select만
 	public Page<Board> list(Pageable pageable) {
 		return boardRepository.findAll(pageable);
+	}
+ 
+	@Transactional(readOnly = true)
+	public Board detail(int id) {
+		return boardRepository.findById(id)
+				.orElseThrow(()->{
+					return new IllegalArgumentException("아이디 못찾음");
+				});
+	}
+	
+	@Transactional
+	public void delete(int id) {
+		boardRepository.deleteById(id);
+	}
+	
+	public void update(int id, Board requestBoard ) {
+		Board board = boardRepository.findById(id)
+				.orElseThrow(()->{
+					return new IllegalArgumentException("글 찾기 실패");
+				}); //영속화
+		board.setTitle(requestBoard.getTitle());
+		board.setContent(requestBoard.getContent());
+		//해당 함수 종료시에 트랜잭션이 Service가 종료될 때 트랜잭션 종료 이때 더티체킹
 	}
 	
 }
