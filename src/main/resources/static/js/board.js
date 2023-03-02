@@ -9,6 +9,9 @@ let index = {
 		$("#btn-delete").on("click",()=>{  //function(){} , () => {} this를 바인딩 하기 위해
 			this.deleteById();
 		});
+		$("#btn-reply-save").on("click",()=>{  //function(){} , () => {} this를 바인딩 하기 위해
+			this.replySave();
+		});
 		
 	},
 	save: function() {
@@ -73,6 +76,31 @@ let index = {
 			//웅덥성공
 			alert("글 수정 완료");
 			location.href="/"
+		}).fail(function(){
+			//응답 실패
+			alert("error");
+			
+		}); 
+	},
+	replySave: function() {
+		let data = {
+			content: $("#reply-content").val(),
+			
+		};
+		let boardId = $("#boardId").val();
+		//ajax호출시 default 비동기 호출
+		// ajax통신을 이용해 3개의 데이터를 json으로 변경하여 insert 요청
+		$.ajax({
+			//회원가입 수행 요청
+			type : "POST",
+			url : `/api/board/${boardId}/reply`,
+			data : JSON.stringify(data), //http body 데이터
+			contentType : "application/json; charset=utf-8",
+			dataType : "json" // 응답 데이터 기본적으로 문자열
+		}).done(function(response){
+			//웅덥성공
+			alert("댓글 작성 완료");
+			location.href=`/board/${boardId}`;
 		}).fail(function(){
 			//응답 실패
 			alert("error");

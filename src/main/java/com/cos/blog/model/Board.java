@@ -13,9 +13,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.core.annotation.Order;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
@@ -41,7 +45,9 @@ public class Board {
 	
 	//하나의 게시글은 여러개의 댓글을 가짐
 	@OneToMany(mappedBy = "board",fetch = FetchType.EAGER) //mappedBy 연관관걔의 주인이 아님(db컬럼 생성 x) Reply의 board가 fk 
-	private List<Reply> reply; 
+	@JsonIgnoreProperties({"board"})  // 무한 참조 방지
+	@OrderBy("id desc")
+	private List<Reply> replys; 
 	
 	@CreationTimestamp
 	private Timestamp createDate;

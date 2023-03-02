@@ -31,7 +31,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // AutoIncrement
 	private int id;
 	
-	@Column(nullable = false, length = 20, unique = true)
+	@Column(nullable = false, length = 100, unique = true)
 	private String username;
 	
 	@Column(nullable = false, length = 100)
@@ -43,6 +43,8 @@ public class User {
 	//@ColumnDefault("'USER'")
 	@Enumerated(EnumType.STRING)
 	private RoleType role; // Enum
+
+	private String oauth; // kakao
 	
 	@CreationTimestamp // 시간 자동 입력
 	private Timestamp createDate;

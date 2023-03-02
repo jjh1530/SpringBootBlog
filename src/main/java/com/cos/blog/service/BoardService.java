@@ -2,9 +2,10 @@ package com.cos.blog.service;
 
 
 import com.cos.blog.model.Board;
+import com.cos.blog.model.Reply;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.BoardRepository;
-
+import com.cos.blog.repository.ReplyRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,9 @@ public class BoardService {
 
 	@Autowired
 	private BoardRepository boardRepository;
+	
+	@Autowired
+	private ReplyRepository replyRepository;
 	
 	@Transactional
 	public void write(Board board,User user) {
@@ -43,6 +47,7 @@ public class BoardService {
 		boardRepository.deleteById(id);
 	}
 	
+	@Transactional
 	public void update(int id, Board requestBoard ) {
 		Board board = boardRepository.findById(id)
 				.orElseThrow(()->{
@@ -52,5 +57,15 @@ public class BoardService {
 		board.setContent(requestBoard.getContent());
 		//해당 함수 종료시에 트랜잭션이 Service가 종료될 때 트랜잭션 종료 이때 더티체킹
 	}
+	
+	@Transactional
+	public void replyWrite(User user, int boardId, Reply requestReply) {
+		Board board = boardRepository.findById(boardId).get();
+		requestReply.setUser(user);
+		requestReply.setBoard(board);
+		
+		replyRepository.save(requestReply);
+	}
+	
 	
 }

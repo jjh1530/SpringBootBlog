@@ -8,10 +8,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.cos.blog.model.User;
 
+import lombok.Data;
 import lombok.Getter;
 
 //스프링 시큐리티의 고유한 세션저장소에 저장
-@Getter
+@Data
 public class PrincipalDetail implements UserDetails{ // userDetails 전부 override
 
 	private User user; //콤포지션
