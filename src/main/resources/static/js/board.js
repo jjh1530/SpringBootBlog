@@ -106,7 +106,21 @@ let index = {
 			alert("error");
 			
 		}); 
-	}
+	},
+	replyDelete: function(boardId, replyId) {
+		$.ajax({
+			//회원가입 수행 요청
+			type : "DELETE",
+			url : `/api/board/${boardId}/reply/${replyId}`,
+			dataType : "json" // 응답 데이터 기본적으로 문자열
+		}).done(function(response){
+			alert("댓글 삭제 완료");
+			location.href=`/board/${boardId}`;
+		}).fail(function(){
+			alert("error");
+			
+		}); 
+	},
 }
 
 index.init();

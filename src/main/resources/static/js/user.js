@@ -26,8 +26,13 @@ let index = {
 			dataType : "json" // 응답 데이터 기본적으로 문자열
 		}).done(function(response){
 			//웅덥성공
-			alert("회원가입 완료");
-			location.href="/"
+			if(response.status === 500) {
+				alert("회원가입 실패");
+			}else {
+				alert("회원가입 완료");
+				location.href="/"
+			}
+			
 		}).fail(function(){
 			//응답 실패
 			alert("error");

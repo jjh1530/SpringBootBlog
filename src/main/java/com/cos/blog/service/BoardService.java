@@ -1,11 +1,13 @@
 package com.cos.blog.service;
 
 
+import com.cos.blog.dto.ReplySaveRequestDto;
 import com.cos.blog.model.Board;
 import com.cos.blog.model.Reply;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.BoardRepository;
 import com.cos.blog.repository.ReplyRepository;
+import com.cos.blog.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +23,7 @@ public class BoardService {
 	
 	@Autowired
 	private ReplyRepository replyRepository;
+	
 	
 	@Transactional
 	public void write(Board board,User user) {
@@ -60,11 +63,18 @@ public class BoardService {
 	
 	@Transactional
 	public void replyWrite(User user, int boardId, Reply requestReply) {
+		
+		
 		Board board = boardRepository.findById(boardId).get();
 		requestReply.setUser(user);
 		requestReply.setBoard(board);
 		
 		replyRepository.save(requestReply);
+	}
+	
+	@Transactional
+	public void replyDelete(int replyId) {
+		replyRepository.deleteById(replyId);
 	}
 	
 	
